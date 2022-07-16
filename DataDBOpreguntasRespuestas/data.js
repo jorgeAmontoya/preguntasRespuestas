@@ -1,9 +1,4 @@
-export const dataj = { 
-    countNumPreguntasCorrectas : 0,
-    NivelActual : 0,
-    puntosAcumulados:100000,
-    puntos:100000,
-   /* PREGUNTAS PRIMER NIVEL */
+export const dataj = {        
    niveles:[
       /*nivelUno:*/ [
          /* question 1*/

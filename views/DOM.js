@@ -1,82 +1,77 @@
-
-import {dataj} from "./data.js";
-// variables globales
-var countNumPreguntasCorrectas = 0;
-
-
+import {dataj} from "../DataDBOpreguntasRespuestas/data.js";
+import {Usuario} from "./Usuario.js";
+import {HistorialJuego} from "./HistorialJuego.js";
+import {FormaSalidaJuego} from "./FormasSalidaDeJuego.js";
 
 
-/*idNivel = 1;
-Idpregunta = 0;
-var numPreguntasCorrectas = 0;
-var puntosPorNivel = 100000*idNivel;
 
-// jugador 
-var nombre ="";
-var correo="";
+HistorialJuego.setNivel(0);
+HistorialJuego.setPuntosAcumulados(0);
+HistorialJuego.setNumPreguntasCorrectas(0);
 
-var idJuego = "";
-var idUsuario = "";
-var usuario="";*/
+let arrayJuego = [];
+  
 
-//export const dato = dataj.niveles.map( dato =>
+const IngresoUsuario = async () => {
 
-//var dato=  dataj.nivelDos.Pregunta;
+    if(document.getElementById("inputUsuario").value == "")
+    {
+        alert("Ingrese su nombre");
+    }
+    else
+    {
+        div.classList.remove("none");
+        Pregunta.classList.remove("none");
+        opcionesRespuesta.classList.remove("none")
+        botones.classList.remove("none");
 
-function guardar_Localstorage(){
-    let persona ={
-        nombre:"",
-        puntos:0,
-        NivelActual1:0,
+        Usuario.setNombre(document.getElementById("inputUsuario").value);
+        inputUsuario.disabled = true;
+        buttonUsuario.disabled = true;
+
+        HistorialJuego.nivel=0;
+        HistorialJuego.puntosAcumulados=0;
+        HistorialJuego.numPreguntasCorrectas=0;
+
+        numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;
+        puntosAcumulados.textContent = "Puntos acumulados: 0";
+        nivel.textContent = "nivel 1";
+
+        cargarPregunta();
+
 
     }
-
-    let nombre = "JOrge"; 
-    let puntos= dataj.puntosAcumulados;
-    let NivelActual1 = dataj.NivelActual;
-    
-//localStorage.setItem("persona", JSON.stringify(persona));
-
-localStorage.setItem("nombre", nombre)
-localStorage.setItem("puntos", puntos)
-localStorage.setItem("nivel", NivelActual1+1)
-    
-
-};
-
-
-const RetirarseJuego = async ({target}) => {
-    opcionesRespuesta.textContent = "";
-    botones.textContent ="";
-    Pregunta.textContent="Fin del juego";
-    guardar_Localstorage()
 }
 
 
-
-const SiguientePregunta = async ({target}) => {
-    var RespuestaSeleccionada = false;
-    var statusCorrecta = false;
-
+const SiguientePregunta = async () => {
+    let RespuestaSeleccionada = false;
+    let statusCorrecta = false;
+debugger;
     if(document.getElementById("a").checked)
     {        
         statusCorrecta = document.getElementById("a").value;
         RespuestaSeleccionada = true;
+        HistorialJuego.respuestaActual = "a";
     }
     if(document.getElementById("b").checked)
     {
         statusCorrecta = document.getElementById("b").value;
         RespuestaSeleccionada = true;
+        HistorialJuego.respuestaActual = "b";
+
     }
     if(document.getElementById("c").checked)
     {
         statusCorrecta = document.getElementById("c").value;
         RespuestaSeleccionada = true;
+        HistorialJuego.respuestaActual = "c";
     }
     if(document.getElementById("d").checked)
     {
         statusCorrecta = document.getElementById("d").value;
         RespuestaSeleccionada = true;
+        HistorialJuego.respuestaActual = "d";
     }
 
 
@@ -87,133 +82,117 @@ const SiguientePregunta = async ({target}) => {
     else if(statusCorrecta == "true")
     {
         
+
         alert("Respondio correctamente");
-        dataj.countNumPreguntasCorrectas = dataj.countNumPreguntasCorrectas+ 1;
-        numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+dataj.countNumPreguntasCorrectas;
-        
-        dataj.puntosAcumulados += (dataj.puntos*(dataj.NivelActual+1));
-        puntosAcumulados.textContent = "Puntos acumulados: "+dataj.puntosAcumulados;
 
+        HistorialJuego.numPreguntasCorrectas = HistorialJuego.numPreguntasCorrectas+ 1;
+        numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;
         
-        var estadoGano = "";
-        
-        if(dataj.countNumPreguntasCorrectas == 5 && dataj.NivelActual == 4 )
+        HistorialJuego.puntosAcumulados += (HistorialJuego.puntosBase*(HistorialJuego.nivel+1));
+        puntosAcumulados.textContent = "Puntos acumulados: "+HistorialJuego.puntosAcumulados;
+        debugger;
+        let estadoGano = "";
+        if(HistorialJuego.numPreguntasCorrectas == 5 && HistorialJuego.nivel == 4 )
         {
-            botones.textContent ="";
-            opcionesRespuesta.textContent = "";
-            Pregunta.textContent="";
-
-            Pregunta.textContent="Fin del juego, ganaste";
-            alert("ganaste");
-            guardar_Localstorage()
-            var estadoGano = "Ganó";
-
-        
+            FormaSalidaJuego.GanoJuego(arrayJuego);
+            estadoGano = "Ganó";        
         }
-        if(dataj.countNumPreguntasCorrectas == 5 && dataj.NivelActual != 5)
+        if(HistorialJuego.numPreguntasCorrectas == 5 && HistorialJuego.nivel != 5)
         {
-            dataj.countNumPreguntasCorrectas =0;
-            numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+dataj.countNumPreguntasCorrectas;
+            HistorialJuego.numPreguntasCorrectas =0;
+            numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;
 
-            dataj.NivelActual++;
-            nivel.textContent = "nivel "+(dataj.NivelActual+1);
-
-            
-            
+            HistorialJuego.nivel++;
+            nivel.textContent = "nivel "+(HistorialJuego.nivel+1);                        
         }
-
         if(estadoGano != "Ganó"){
             cargarPregunta();
-
         }
-
+        HistorialJuego.actualizaHistorial(arrayJuego);
     }
     else
     {
-        opcionesRespuesta.textContent = "";
-        botones.textContent ="";
-        Pregunta.textContent="Fin del juego";
-        dataj.puntosAcumulados = 0;
-        puntosAcumulados.textContent = "Puntos acumulados: "+dataj.puntosAcumulados;
-        guardar_Localstorage()
-        alert("perdio");
+        FormaSalidaJuego.PerdioJuego(arrayJuego);
     }
-
 }
 
 const cargarPregunta = function (){
 
-    var max = 4;
-    var min = 0;
-    var numeroAleatorioPregunta = Math.floor(Math.random() * (max - min + 1) + min);
-    var nivelPregunta = dataj.NivelActual;
+    const max = 4;
+    const min = 0;
+    const numeroAleatorioPregunta = Math.floor(Math.random() * (max - min + 1) + min);
+    const nivelPregunta = HistorialJuego.nivel;
 
     Pregunta.textContent="";
-    Pregunta.append(dataj.niveles[nivelPregunta][numeroAleatorioPregunta].question)
+    Pregunta.append(dataj.niveles[nivelPregunta][numeroAleatorioPregunta].question);
     
+    HistorialJuego.preguntaActual = numeroAleatorioPregunta;
+
     cargarOpcionesRespuesta(nivelPregunta,numeroAleatorioPregunta);
-
 }
 
-const cargarOpcionesRespuesta = function (nivel,numeroAleatorioPregunta){
+const cargarOpcionesRespuesta = function (nivelPregunta,numeroAleatorioPregunta){
     opcionesRespuesta.textContent = "";
-    for( let i = 0; i<dataj.niveles[nivel][numeroAleatorioPregunta].choices.length; i++ ){
-       
+    for(const element of dataj.niveles[nivelPregunta][numeroAleatorioPregunta].choices){       
+        const boxwrapper = document.createElement('div');
+        boxwrapper.classList.add("boxwrapper");
 
-            const boxwrapper = document.createElement('div');
-            boxwrapper.classList.add("boxwrapper");
+        const opcion = document.createElement('div');
+        opcion.id = "opcion_"+ element.letra;
+        opcion.classList.add("box");
 
-            const opcion = document.createElement('div');
-            opcion.id = "opcion_"+ dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra;
-            opcion.classList.add("box");
+        const checkboxwrap = document.createElement('div');
+        checkboxwrap.classList.add("checkbox-wrap");
+        let correcta = "";
+        if(element.descripcion == dataj.niveles[nivelPregunta][numeroAleatorioPregunta].answer)
+        {
+            correcta = "true";
+        }
+        else
+        {
+            correcta = "false";
+        }
+        const checkbox1 = document.createElement('input');
+        checkbox1.id = element.letra;
+        checkbox1.classList.add('form-check-input');
+        checkbox1.type = "checkbox";
+        checkbox1.value= correcta;
+        if(element.letra =="a")
+        {
+            checkbox1.addEventListener('click',estadoCheckbox_a);
+        }
+        if(element.letra =="b")
+        {
+            checkbox1.addEventListener('click',estadoCheckbox_b);
+        }
+        if(element.letra =="c")
+        {
+            checkbox1.addEventListener('click',estadoCheckbox_c);
+        }
+        if(element.letra =="d")
+        {
+            checkbox1.addEventListener('click',estadoCheckbox_d);
+        }
+        const lable = document.createElement('label');
+        lable.for = element.letra;
+        lable.classList.add("form-check-label", "fw-bold");
+        lable.textContent = element.descripcion;
 
-            const checkboxwrap = document.createElement('div');
-            checkboxwrap.classList.add("checkbox-wrap");
+        checkboxwrap.append(checkbox1);
+        opcion.append(checkboxwrap,lable);
+        boxwrapper.append(opcion);
 
-            if(dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].descripcion == dataj.niveles[nivel][numeroAleatorioPregunta].answer)
-            {
-                var correcta = "true";
-            }
-            else
-            {
-                var correcta = "false";
-            }
-            const checkbox1 = document.createElement('input');
-            checkbox1.id = dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra;
-            checkbox1.classList.add('form-check-input');
-            checkbox1.type = "checkbox";
-            checkbox1.value= correcta;
-            if(dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra =="a")
-            {
-                checkbox1.addEventListener('click',estadoCheckbox_a);
-            }
-            if(dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra =="b")
-            {
-                checkbox1.addEventListener('click',estadoCheckbox_b);
-            }
-            if(dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra =="c")
-            {
-                checkbox1.addEventListener('click',estadoCheckbox_c);
-            }
-            if(dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra =="d")
-            {
-                checkbox1.addEventListener('click',estadoCheckbox_d);
-            }
-            const lable = document.createElement('label');
-            lable.for = dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].letra;
-            lable.classList.add("form-check-label", "fw-bold");
-            lable.textContent = dataj.niveles[nivel][numeroAleatorioPregunta].choices[i].descripcion;
-
-            checkboxwrap.append(checkbox1);
-            opcion.append(checkboxwrap,lable);
-            boxwrapper.append(opcion);
-
-
-            opcionesRespuesta.append(boxwrapper);
+        opcionesRespuesta.append(boxwrapper);
     }
-   
 }
 
+function estadoCheckbox_a()
+{
+    document.getElementById("a").checked = true;
+    document.getElementById("b").checked = false;
+    document.getElementById("c").checked = false;
+    document.getElementById("d").checked = false;
+}  
 function estadoCheckbox_b()
 {    
     document.getElementById("a").checked = false;
@@ -238,18 +217,27 @@ function estadoCheckbox_d()
     document.getElementById("d").checked = true;
 }
 
-function estadoCheckbox_a()
-{
-    document.getElementById("a").checked = true;
-    document.getElementById("b").checked = false;
-    document.getElementById("c").checked = false;
-    document.getElementById("d").checked = false;
-}  
-   
+
 
 //#region  DOm
+const divUsuario = document.createElement('div');
+const inputUsuario = document.createElement('input');
+inputUsuario.id = "inputUsuario";
+inputUsuario.placeholder = "Ingrese su nombre";
+
+const buttonUsuario = document.createElement("button");
+buttonUsuario.id = "buttonUsuario";
+buttonUsuario.addEventListener('click', IngresoUsuario);
+buttonUsuario.textContent = "Ingreso"
+
+
+
+divUsuario.append(inputUsuario,buttonUsuario);
+
 const contenedor = document.querySelector('#container');
 const div = document.createElement('div');
+div.id = "informacion";
+div.classList.add("none");
 
 const divCargaUsuario = document.createElement('div');
 divCargaUsuario.id = "CargaUsuario";
@@ -271,17 +259,18 @@ div.append(divCargaUsuario, nivel, numPreguntasCorrectas, puntosAcumulados);
 const Pregunta = document.createElement('div');
 Pregunta.id = "Pregunta";
 
+Pregunta.classList.add("none");
 
 const opcionesRespuesta = document.createElement('div');
 opcionesRespuesta.id = "opcionesRespuesta";
-
+opcionesRespuesta.classList.add("none")
 const botones = document.createElement('div');
 botones.id = "botones";
-
+botones.classList.add("none");
 const btn__retirarse = document.createElement("button");
 btn__retirarse.id = "btn__retirarse";
 btn__retirarse.textContent = "Retirarse"
-btn__retirarse.addEventListener('click', RetirarseJuego);
+btn__retirarse.addEventListener('click',function(){ FormaSalidaJuego.RetirarseJuego(arrayJuego)});
 
 const btn__siguiente = document.createElement("button");
 btn__siguiente.id = "btn__siguiente";
@@ -290,32 +279,11 @@ btn__siguiente.addEventListener('click', SiguientePregunta);
 
 botones.append(btn__retirarse, btn__siguiente);
 
-contenedor.append(div, Pregunta, opcionesRespuesta, botones);
-
+contenedor.append(divUsuario,div, Pregunta, opcionesRespuesta, botones);
 //#endregion
 
 
 
 
 
-//Aleatorio
-cargarPregunta();
 
-/*
-
-
-
-<div>
-    <div id="CargaUsuario"></div>
-    <div id="numNivel"><p>Nivel 1</p></div>
-    <div id="numPreguntasCorrectas"><p>Número de preguntas correctas: 0</p></div>
-    <div id="puntosAcumulados"><p>Puntos acumulados: 0</p></div>
-</div>    
-<span></span>
-<div id="Pregunta"> </div>
-<div id="opcionesRespuesta"></div>
-<span></span>
-<div id="botones">       
-    <button id="btn__retirarse">Retiraaaarse</button>                    
-    <button id="btn__siguiente">Siguiente</button> 
-</div>*/
