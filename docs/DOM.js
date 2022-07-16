@@ -1,4 +1,4 @@
-import {dataj} from "../DataDBOpreguntasRespuestas/data.js";
+import {dataj} from "./DataDBOpreguntasRespuestas/data.js";
 import {Usuario} from "./Usuario.js";
 import {HistorialJuego} from "./HistorialJuego.js";
 import {FormaSalidaJuego} from "./FormasSalidaDeJuego.js";
