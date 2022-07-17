@@ -1,12 +1,36 @@
+/**
+ * @description el dataj es un arreglo Objtos Json que permite consultar las preguntas, el  id de la pregunta, las opciones de respuesta, el nivel, la respuesta 
+ * correcta los cuales son necesarios para la funcionalidad del juego. el arreglo @dataj consta de cinco niveles los cuales contienen cada uno cinco 
+ * preguntas; cada pregunta consta de 4 opciones de respuesta y una opcion correcta.
+ */
 export const dataj = {        
+   /**
+    *@description arreglo donde se encuentran los niveles, las preguntas, las opciones de respuesta,
+    la letra y la respuesta correcta correspondiente a cada preguntas
+    */
    niveles:[
-      /*nivelUno:*/ [
+      /*nivelUno:*/ [      
          /* question 1*/
+         
          {
             id: 1,
+            /**
+             * preguntas almacenadas en data.js
+             */
             question: '¿Qué son las palabras reservadas?',
+            /**
+             * @description opciones de respuesta
+             */
             choices: [
-               { letra:"a", 
+               { 
+                  /**
+                   * @type String
+                   * @description letra correspondiente a la opcion de respuesta
+                   */
+                  letra:"a", 
+               /**
+                * @description descripcion de la opcion de respuestas correspondiente a una pregunta
+                */
                descripcion: 'a) Son las palabras que usamos para definir variables'
                }, 
                {
@@ -21,6 +45,9 @@ export const dataj = {
                   descripcion: 'd) Es la palabra que se reserva en memoria para usarla posteriormente'
                }
             ],
+            /**
+             * @description respuesta correcta
+             */
             answer: "c) Son las palabras que no podemos usar; porque tienen un significado especial para el compilador",
          },
 
@@ -124,7 +151,7 @@ export const dataj = {
          },
 
       ],      
-      /* PREGUNTAS SEGUNDO NIVEL */
+     
       /*nivelDos:*/ [
 
          /* question 6 */
@@ -245,9 +272,9 @@ export const dataj = {
             answer: 'b) Common language runtime',
          },
       ],
-      /* PREGUNTAS TERCER NIVEL */
+
       /*niveltres:*/ [
-         /* question 1*/
+         /* question 11*/
          {
             id: 11,
             question: '¿ Cúal de las siguientes  variables locales están escritas correctamente usando camel Case?',
@@ -261,7 +288,7 @@ export const dataj = {
                },
                {
                   letra: "c",
-                  descripcion: 'c) string estoEsUnaVariable = “hola”; '
+                  descripcion: 'c) string estoEsUnaVariable = “hola”;'
                }, 
                {
                   letra: "d",
@@ -271,7 +298,7 @@ export const dataj = {
             answer: "c) string estoEsUnaVariable = “hola”;",
          },
 
-         /* question 2*/
+         /* question 12*/
          {
             id: 12,
             question: '¿Los operadores  booleanos son aquellos que  devuelven un true o un false, dentro de los operadores Booleanos está el conectivo lógico and, este operador devuelve un true si:',
@@ -296,7 +323,7 @@ export const dataj = {
             answer: 'a) Si  ambos valores son true ',
          },
 
-         /* question 3*/
+         /* question 13*/
          {
             id: 13,
             question: 'Si se tiene la siguiente cadena de texto S = “hOlA MunDo” al aplicar el s.lower () , qué transformación tendrá la cadena de texto:',
@@ -321,7 +348,7 @@ export const dataj = {
             answer: 'a) “hola mundo” ',
          },
 
-         /* question 4*/
+         /* question 14*/
          {
             id: 14,
             question: '¿Para qué sirven las variables?',
@@ -346,7 +373,7 @@ export const dataj = {
             answer: 'b) Para almacenar valores y operar con ellos ',
          },
 
-         /* question 5*/
+         /* question 15*/
          {
             id: 15,
             question: '¿Se puede cambiar el valor de una constante?',
@@ -372,10 +399,8 @@ export const dataj = {
          },
 
       ],
-
-      /* PREGUNTAS CUARTO NIVEL */
-      /*niveltres:*/ [
-         /* question 1*/
+      /*nivelcuatro:*/ [
+         /* question 16*/
          {
             id: 16,
             question: '¿Qué bucle usarías para recorrer una lista de elementos?',
@@ -399,7 +424,7 @@ export const dataj = {
             answer: "d) for y foreach ambos sirven",
          },
 
-         /* question 2*/
+         /* question 17*/
          {
             id: 17,
             question: '¿Qué hace el operador ++? ',
@@ -424,7 +449,7 @@ export const dataj = {
             answer: 'c) El operador suma 1 a un valor entero asignado ',
          },
 
-         /* question 3*/
+         /* question 18*/
          {
             id: 18,
             question: '¿Es obligatorio el uso de else dentro de un condicional If?  ',
@@ -449,7 +474,7 @@ export const dataj = {
             answer: 'b) No ',
          },
 
-         /* question 4*/
+         /* question 19*/
          {
             id: 19,
             question: '¿Cuál es la diferencia entre un método y una función?',
@@ -474,7 +499,7 @@ export const dataj = {
             answer: 'b) Un método puede devolver o no resultados, una función devuelve siempre resultado ',
          },
 
-         /* question 5*/
+         /* question 20*/
          {
             id: 20,
             question: '¿ Qué se puede entender por lenguaje de programación?',
@@ -499,11 +524,9 @@ export const dataj = {
             answer: 'b) Una manera definida para escribir instrucciones claras para programar aplicaciones de alto nivel.',
          },
 
-      ],
-      
-      /* PREGUNTAS QUINTO NIVEL */
-      /*niveltres:*/ [
-         /* question 1*/
+      ], 
+      /*nivel cinco:*/ [
+         /* question 21*/
          {
             id: 21,
             question: '¿Qué es una base de datos?',
@@ -527,7 +550,7 @@ export const dataj = {
             answer: "b) Es un servidor que permite persistir información o datos concretos",
          },
 
-         /* question 2*/
+         /* question 22*/
          {
             id: 22,
             question: '¿Qué es un algoritmo? ',
@@ -552,7 +575,7 @@ export const dataj = {
             answer: 'b) Instrucciones lógicas con un propósito específico ',
          },
 
-         /* question 3*/
+         /* question 23*/
          {
             id: 23,
             question: '¿Que es una variable de bandera?  ',
@@ -577,7 +600,7 @@ export const dataj = {
             answer: 'a) Es una variable lógica que se utiliza para conservar el estado (verdadero o falso) de una condición, la cual toma valores binarios 1= si y 0 = no ',
          },
 
-         /* question 4*/
+         /* question 24*/
          {
             id: 24,
             question: '¿Cual es la mejor forma de consumir librerías de terceros?',
@@ -602,7 +625,7 @@ export const dataj = {
             answer: 'c) Usando paquetes nuget ',
          },
 
-         /* question 5*/
+         /* question 25*/
          {
             id: 25,
             question: 'No sirve Do\ While para iterar sobre una lista de elementos',

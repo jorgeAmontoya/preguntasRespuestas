@@ -2,6 +2,12 @@ import {dataj} from "./DataDBOpreguntasRespuestas/data.js";
 import {Usuario} from "./Usuario.js";
 import {HistorialJuego} from "./HistorialJuego.js";
 import {FormaSalidaJuego} from "./FormasSalidaDeJuego.js";
+//import { IngresoUsuario } from "./IngresoUsuario.js";
+//import {cargarPregunta} from "./CargarPregunta.js";
+
+
+
+
 
 
 
@@ -9,9 +15,19 @@ HistorialJuego.setNivel(0);
 HistorialJuego.setPuntosAcumulados(0);
 HistorialJuego.setNumPreguntasCorrectas(0);
 
+/**
+ * @type{Array} permite guardar los datos del jugador a lo largo del juego 
+ */
 let arrayJuego = [];
+
   
 
+
+/**
+ * @description funcion asincronica que permite capturar el nombre del 
+ * jugador.
+ * @function async 
+ */
 const IngresoUsuario = async () => {
 
     if(document.getElementById("inputUsuario").value == "")
@@ -20,7 +36,7 @@ const IngresoUsuario = async () => {
     }
     else
     {
-        div.classList.remove("none");
+        divInformacion.classList.remove("none");
         Pregunta.classList.remove("none");
         opcionesRespuesta.classList.remove("none")
         botones.classList.remove("none");
@@ -43,7 +59,11 @@ const IngresoUsuario = async () => {
     }
 }
 
-
+/**
+ * @description funcion que permite pasar a la siguiente pregunta, solo si la pregunta marcada en el
+ * checked es correcta, ademas se actualiza el arrayJuego con los puntos obtenidos.
+ * @function {async}
+ */
 const SiguientePregunta = async () => {
     let RespuestaSeleccionada = false;
     let statusCorrecta = false;
@@ -97,15 +117,12 @@ debugger;
             FormaSalidaJuego.GanoJuego(arrayJuego);
             estadoGano = "Ganó";        
         }
-        if(HistorialJuego.numPreguntasCorrectas == 5 && HistorialJuego.nivel != 5)
-        {
-            HistorialJuego.numPreguntasCorrectas =0;
-            numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;
-
+      
+        if(estadoGano != "Ganó"){
             HistorialJuego.nivel++;
             nivel.textContent = "nivel "+(HistorialJuego.nivel+1);                        
-        }
-        if(estadoGano != "Ganó"){
+
+
             cargarPregunta();
         }
         HistorialJuego.actualizaHistorial(arrayJuego);
@@ -115,12 +132,27 @@ debugger;
         FormaSalidaJuego.PerdioJuego(arrayJuego);
     }
 }
-
+/**
+ * @description funcion que permite generar una pregunta aleatoria proveniente de la data.js
+ */
 const cargarPregunta = function (){
-
+/**
+ * @type {number}
+ * @description permite tener un numero maximo necesario para generar el numero random
+ */
     const max = 4;
+    /**
+     * @type {number}
+     * @description numero que necesario para saber el numero minimo generado aleatoriamente
+     */
     const min = 0;
+    /**
+     * @description numero generado aleatoriamente usando la clase math.random
+     */
     const numeroAleatorioPregunta = Math.floor(Math.random() * (max - min + 1) + min);
+    /**
+     * @description se obtiene el nivel al cual corresponda la pregunta
+     */
     const nivelPregunta = HistorialJuego.nivel;
 
     Pregunta.textContent="";
@@ -131,6 +163,12 @@ const cargarPregunta = function (){
     cargarOpcionesRespuesta(nivelPregunta,numeroAleatorioPregunta);
 }
 
+/**
+ * @description permite cargar las opciones de respuestas del data.js
+ * esta funcion se le debe pasar:
+ * @param {number} nivelPregunta 
+ * @param {number} numeroAleatorioPregunta 
+ */
 const cargarOpcionesRespuesta = function (nivelPregunta,numeroAleatorioPregunta){
     opcionesRespuesta.textContent = "";
     for(const element of dataj.niveles[nivelPregunta][numeroAleatorioPregunta].choices){       
@@ -185,7 +223,7 @@ const cargarOpcionesRespuesta = function (nivelPregunta,numeroAleatorioPregunta)
         opcionesRespuesta.append(boxwrapper);
     }
 }
-
+// estadoChecbox
 function estadoCheckbox_a()
 {
     document.getElementById("a").checked = true;
@@ -235,9 +273,9 @@ buttonUsuario.textContent = "Ingreso"
 divUsuario.append(inputUsuario,buttonUsuario);
 
 const contenedor = document.querySelector('#container');
-const div = document.createElement('div');
-div.id = "informacion";
-div.classList.add("none");
+const divInformacion = document.createElement('div');
+divInformacion.id = "informacion";
+divInformacion.classList.add("none");
 
 const divCargaUsuario = document.createElement('div');
 divCargaUsuario.id = "CargaUsuario";
@@ -254,7 +292,7 @@ const puntosAcumulados = document.createElement('div');
 puntosAcumulados.id = "puntosAcumulados";
 puntosAcumulados.textContent = "Puntos acumulados: 0";
 
-div.append(divCargaUsuario, nivel, numPreguntasCorrectas, puntosAcumulados);
+divInformacion.append(divCargaUsuario, nivel, numPreguntasCorrectas, puntosAcumulados);
 
 const Pregunta = document.createElement('div');
 Pregunta.id = "Pregunta";
@@ -279,7 +317,7 @@ btn__siguiente.addEventListener('click', SiguientePregunta);
 
 botones.append(btn__retirarse, btn__siguiente);
 
-contenedor.append(divUsuario,div, Pregunta, opcionesRespuesta, botones);
+contenedor.append(divUsuario,divInformacion, Pregunta, opcionesRespuesta, botones);
 //#endregion
 
 
