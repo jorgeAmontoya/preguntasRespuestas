@@ -1,7 +1,6 @@
 /**
  * se importa la funcion @usuario para poder acceder al atributo de nombre.
  */
-//import { json } from "express/lib/response.js";
 import { Usuario } from "./Usuario.js";
 /**
  * @description  se crean los atributos necesarios, con sus respectivos geters y seters con el fin de crear una funcion 
@@ -32,7 +31,6 @@ export const HistorialJuego = {
      * @type{String}
      */
     respuestaActual:"",
-    
     /**
      *  @returns permite obtener el nivel registrado
      */
@@ -69,12 +67,12 @@ export const HistorialJuego = {
         this.numPreguntasCorrectas = numPreguntasCorrectas;
     },    
     /**
-     * 
+     * @description Esta funcion se encarga de actualizar el localStore cuando el usuario responde una pregunta 
+     * correctamente y pasa al siguiente nivel
      * @param {array} arrayJuego en la funcion se ingresan los atributos necesarios para tener un historial
      * de juego en un array y posteriormente este arreglo se guarda en el localStore.
      */
-    actualizaHistorial:function(arrayJuego)
-    {
+    actualizaHistorial:function(arrayJuego){
         let item = {
             nombre: Usuario.nombre,
             nivelPregunta:this.nivel+1,
@@ -88,8 +86,18 @@ export const HistorialJuego = {
         localStorage.setItem("HistorialJuego",JSON.stringify(arrayJuego));  
         debugger;
 
-        let jjj =JSON.parse( localStorage.getItem( "HistorialJuego"));
+    },
+    /**
+     * @description Esta funcion se encarga de actualizar el localStore de los metodos de salida de juego.
+     * @param {array} arrayJuego en la funcion se ingresan los atributos necesarios para tener un historial
+     * de juego en un array y posteriormente este arreglo se guarda en el localStore.
+     * @param {let} item es un json con la informacion que se va almacenar en el arrayJuego, el cual posteriormente
+     * se va guardar en el localStore
+     */
+    actualizaHistorialSalidaJuego:function(item,arrayJuego){
+        arrayJuego.push(item);
+        localStorage.setItem("HistorialJuego",JSON.stringify(arrayJuego));     
+        inputUsuario.disabled = false;
+        buttonUsuario.disabled = false;
     }
-        
-
 }

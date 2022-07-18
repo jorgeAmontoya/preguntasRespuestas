@@ -418,7 +418,7 @@ export const dataj = {
                }, 
                {
                   letra: "d",
-                  descripcion: 'd) for y foreach ambos sirven '
+                  descripcion: 'd) for y foreach ambos sirven'
                }
             ],
             answer: "d) for y foreach ambos sirven",
@@ -536,7 +536,7 @@ export const dataj = {
                }, 
                {
                   letra:"b", 
-               descripcion:'b) Es un servidor que permite persistir información o datos concretos '
+               descripcion:'b) Es un servidor que permite persistir información o datos concretos'
                },
                {
                   letra: "c",
