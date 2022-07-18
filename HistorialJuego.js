@@ -75,7 +75,7 @@ export const HistorialJuego = {
     actualizaHistorial:function(arrayJuego){
         let item = {
             nombre: Usuario.nombre,
-            nivelPregunta:this.nivel+1,
+            nivelPregunta:this.nivel,
             idPregunta:this.preguntaActual,
             respuesta:this.respuestaActual,
             estadoRespuesta:"correcta", 
@@ -84,7 +84,6 @@ export const HistorialJuego = {
         }
         arrayJuego.push(item);
         localStorage.setItem("HistorialJuego",JSON.stringify(arrayJuego));  
-        debugger;
 
     },
     /**

@@ -11,6 +11,7 @@ HistorialJuego.setNumPreguntasCorrectas(0);
  * @type{Array} permite guardar los datos del jugador a lo largo del juego 
  */
 let arrayJuego = [];
+const contenedor = document.querySelector('#container');
 
 const divUsuario = document.createElement('div');
 const inputUsuario = document.createElement('input');
@@ -23,8 +24,6 @@ buttonUsuario.addEventListener('click', Usuario.IngresoUsuario);
 buttonUsuario.textContent = "Ingreso"
 
 divUsuario.append(inputUsuario,buttonUsuario);
-
-const contenedor = document.querySelector('#container');
 
 const divInformacion = document.createElement('div');
 divInformacion.id = "divInformacion";

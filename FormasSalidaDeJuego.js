@@ -27,8 +27,8 @@ export const FormaSalidaJuego = {
         botones.classList.add("none");
         Pregunta.textContent="Fin del juego";
         let item = {
-            nombre: "fvjkv",
-            nivelPregunta:HistorialJuego.nivel+1,
+            nombre: Usuario.nombre,
+            nivelPregunta:HistorialJuego.nivel,
             idPregunta:HistorialJuego.preguntaActual,
             respuesta:"No aplica",
             estadoRespuesta:"No aplica", //correcta o incorrecta o N/A
@@ -65,7 +65,7 @@ export const FormaSalidaJuego = {
         */
         let item = {
             nombre: Usuario.nombre,
-            nivelPregunta:HistorialJuego.nivel+1,
+            nivelPregunta:HistorialJuego.nivel,
             idPregunta:HistorialJuego.preguntaActual,
             respuesta:HistorialJuego.respuestaActual,
             estadoRespuesta:"Incorrecta", 

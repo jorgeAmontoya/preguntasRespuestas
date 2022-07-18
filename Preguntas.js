@@ -27,7 +27,7 @@ export const Preguntas = {
         const nivelPregunta = HistorialJuego.nivel;    
         Pregunta.textContent="";
         Pregunta.append(dataj.niveles[nivelPregunta][numeroAleatorioPregunta].question);        
-        HistorialJuego.preguntaActual = numeroAleatorioPregunta;    
+        HistorialJuego.preguntaActual = dataj.niveles[nivelPregunta][numeroAleatorioPregunta].id;    
         OpcionesRespuestas.cargarOpcionesRespuesta(nivelPregunta,numeroAleatorioPregunta);
     },
     /**
@@ -74,10 +74,11 @@ export const Preguntas = {
             }      
             if(estadoGano != "Ganó"){
                 HistorialJuego.nivel++;
-                nivel.textContent = "nivel "+(HistorialJuego.nivel+1);                        
+                nivel.textContent = "nivel "+(HistorialJuego.nivel+1);   
+                HistorialJuego.actualizaHistorial(arrayJuego);                     
                 Preguntas.cargarPregunta();
             }
-            HistorialJuego.actualizaHistorial(arrayJuego);
+           
         }
         else{
             FormaSalidaJuego.PerdioJuego(arrayJuego);
