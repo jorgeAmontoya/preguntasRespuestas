@@ -23,6 +23,18 @@ export const FormaSalidaJuego = {
      * @preguntas - div en esta funcion se esconden las preguntas y se carga un nuevo mensaje "fin Juego" 
     */
     RetirarseJuego:function(arrayJuego){
+    debugger;
+        Swal.fire({
+            title: '¿Quiere retirarse?',
+            text: "Estas seguro de abandonar el juego",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                
         opcionesRespuesta.textContent = "";
         botones.classList.add("none");
         Pregunta.textContent="Fin del juego";
@@ -35,7 +47,11 @@ export const FormaSalidaJuego = {
             puntosAcumulados:HistorialJuego.puntosAcumulados,            
             formaSalida:"Retiro"
         }
-        HistorialJuego.actualizaHistorialSalidaJuego(item,arrayJuego);   
+        HistorialJuego.actualizaHistorialSalidaJuego(item,arrayJuego); 
+              
+            }
+          })
+  
     },
     /**
      * @description esta funcion es llamada cuando el jugador contesta de manera incorrecta una pregunta, cuando pierde se guarda en 
