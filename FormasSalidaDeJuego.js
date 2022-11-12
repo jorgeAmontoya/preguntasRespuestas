@@ -73,7 +73,7 @@ export const FormaSalidaJuego = {
             formaSalida:"Perdio"
         }        
         HistorialJuego.actualizaHistorialSalidaJuego(item,arrayJuego);   
-        alert("perdio");        
+        Swal.fire("perdio");        
     },
     /**
      * @description esta funcion se activa cuando el jugador responde correctamente todas las preguntas y muestra el mensaje 
@@ -97,6 +97,6 @@ export const FormaSalidaJuego = {
             formaSalida:"Gano"
         }               
         HistorialJuego.actualizaHistorialSalidaJuego(item,arrayJuego);
-        alert("ganaste"); 
+        Swal.fire("ganaste"); 
     }
 }

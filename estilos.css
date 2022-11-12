@@ -1,30 +1,44 @@
 
 *{
-    margin: 4px;;
+    /*margin: 4px;*/
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     font-family: sans-serif;
 }
 
-html,body{
+html{
     position: relative;
-    width: 100%;
-    background: black;
-    
-}
-.container{
-    position: relative;
-    /*width: 600px;*/
-    /*margin: 0 auto;*/
-    padding: 20px;
-    background-color: rgba(0,128,255,0.5);
     height: 100%;
+    width: 100%;        
+}
+.container1{
+   /* position: relative;
+     width: 600px; */
+    /* margin: 0 auto;*/
+    padding: 20px; 
+    /*background-color: rgba(0,128,255,0.5);*/
+    height: 100vh;
+    width: 50%;
+    /*max-width: 800px;*/
+    margin: auto;
+     /*position: relative; */
+   
+}
 
-    width: 100%;
-    max-width: 800px;
-    margin:auto;
-    /*position: relative;*/
+
+.container3{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100vh;
+    
+
+    
+
 }
 
 .container h3{
@@ -71,7 +85,7 @@ html,body{
     border-right: 1px solid #425970;
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 10px!important;
 }
 .box-wrapper .box .checkbox-wrap input[type="checkbox"]{
     
@@ -104,8 +118,9 @@ html,body{
 /*TRabajando en el responsive desing*/
 @media screen and (max-width: 850px)
 {
-    .container{
+    .container1{
         padding: 5px;
+        width: 100%;
     }
     .container h3{
         margin: 10px 0 15px 0;
@@ -120,7 +135,7 @@ html,body{
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    color: black;
+    color: rgb(250, 246, 246);
     outline: none;
     transition: all 300ms;
 }
@@ -153,19 +168,33 @@ html,body{
     color: #46A2FD;
 }
 
-#inputUsuario{
-    padding: 10px 40px;
-    border: 2px solid #fff;
-   
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    color: black;
-    outline: none;
-    transition: all 300ms;
-
-}
-
 .none{
     display: none;
 }
+body{
+    background-image: url(1.jpg);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+#ingresoform{
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+div{
+    color: white;
+}
+
+.checkbox-wrap{
+    margin-right: 8px;
+
+}
+.full-divider {
+    width: 100%;
+    height: 5px;
+    background-color: #2d1fee;
+    margin: 5px 0 0 0;
+    clear: both;
+}
+

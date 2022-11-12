@@ -59,10 +59,10 @@ export const Preguntas = {
             HistorialJuego.respuestaActual = "d";
         }
         if(!RespuestaSeleccionada){
-            alert("Seleccione una opción");       
+            Swal.fire("Seleccione una opción");       
         }
         else if(statusCorrecta == "true"){        
-            alert("Respondio correctamente");
+            Swal.fire("Respondio correctamente");
             HistorialJuego.numPreguntasCorrectas = HistorialJuego.numPreguntasCorrectas+ 1;
             numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;        
             HistorialJuego.puntosAcumulados += (HistorialJuego.puntosBase*(HistorialJuego.nivel+1));

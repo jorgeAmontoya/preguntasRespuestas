@@ -97,6 +97,6 @@ export const HistorialJuego = {
         arrayJuego.push(item);
         localStorage.setItem("HistorialJuego",JSON.stringify(arrayJuego));     
         inputUsuario.disabled = false;
-        buttonUsuario.disabled = false;
+        //buttonUsuario.disabled = false;
     }
 }

@@ -25,23 +25,38 @@ export const Usuario = {
      */
     IngresoUsuario :function(){        
         if(document.getElementById("inputUsuario").value == ""){
-            alert("Ingrese su nombre");
+            Swal.fire('Por favor ingrese su nombre');
         }
+        else if(document.getElementById("typeEmailX").value == ""){
+            Swal.fire("Por favor Ingrese su correo");
+        }
+       
         else{
+            const sectionLogin = document.querySelector("#sectionLogin");
+            sectionLogin.classList.add("none");
+
+            const contenedor = document.querySelector('#container');
+
+            contenedor.classList.add("container1");
+            contenedor.classList.add("container3");
+
+
             divInformacion.classList.remove("none");
             Pregunta.classList.remove("none");
             opcionesRespuesta.classList.remove("none")
             botones.classList.remove("none");
             Usuario.setNombre(document.getElementById("inputUsuario").value);
             inputUsuario.disabled = true;
-            buttonUsuario.disabled = true;
+           // buttonUsuario.disabled = true;
             HistorialJuego.nivel=0;
             HistorialJuego.puntosAcumulados=0;
             HistorialJuego.numPreguntasCorrectas=0;
             numPreguntasCorrectas.textContent = "Número de preguntas correctas: "+HistorialJuego.numPreguntasCorrectas;
             puntosAcumulados.textContent = "Puntos acumulados: 0";
             nivel.textContent = "nivel 1";
-            Preguntas.cargarPregunta();        
+            Preguntas.cargarPregunta();
+            
+        
         }
     }   
 }
